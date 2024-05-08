@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KeyView : MonoBehaviour, IInteractable
 {
-    [SerializeField] GameUIView gameUIView;
+    
     public void Interact()
     {
         int currentKeys= GameService.Instance.GetPlayerController().KeysEquipped;
@@ -10,7 +10,8 @@ public class KeyView : MonoBehaviour, IInteractable
         GameService.Instance.GetSoundView().PlaySoundEffects(SoundType.KeyPickUp);
 
         currentKeys++;
-        gameUIView.UpdateKeyText();
+
+        EventService.Instance.OnkeyPickedIp.InvokeEvent(currentKeys);
 
         gameObject.SetActive(false);
     }
